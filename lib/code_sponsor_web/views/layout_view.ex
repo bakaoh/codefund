@@ -1,8 +1,6 @@
 defmodule CodeSponsorWeb.LayoutView do
   use CodeSponsorWeb, :view
 
-  import Phoenix.Controller, only: [view_module: 1, action_name: 1]
-
   @doc """
   Calls the `title` fn of the current `view_module` with the performed `:action` as arg.
   If no fun exists/matches the `default` title is returned instead.
@@ -48,5 +46,10 @@ defmodule CodeSponsorWeb.LayoutView do
     else
       ""
     end
+  end
+
+  def flash_element(conn) do
+    flash_json = Poison.encode!(get_flash(conn))
+    content_tag(:div, "", [{:data, [flash: flash_json, controller: "flash"]}])
   end
 end
