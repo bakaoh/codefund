@@ -1,12 +1,15 @@
 defmodule CodeSponsor.Schema.Campaign do
   use CodeSponsorWeb, :schema_with_formex
 
+  alias CodeSponsor.Schema.{Impression, Click, BudgetedCampaign, User}
+
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "campaigns" do
-    has_many :impressions, CodeSponsor.Schema.Impression
-    has_many :clicks, CodeSponsor.Schema.Click
-    belongs_to :user, CodeSponsor.Schema.User
+    has_many :impressions, Impression
+    has_many :clicks, Click
+    has_many :budgeted_campaigns, BudgetedCampaign
+    belongs_to :user, User
 
     field :name, :string
     field :redirect_url, :string

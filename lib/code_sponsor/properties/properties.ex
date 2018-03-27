@@ -90,6 +90,8 @@ defmodule CodeSponsor.Properties do
     end
   end
 
+  def get_property_by_name!(name), do: Repo.get_by!(Property, name: name) |> Repo.preload(:user)
+
   @doc """
   Creates a property.
 
